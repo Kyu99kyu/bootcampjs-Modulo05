@@ -1,34 +1,20 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 h1 {
@@ -72,6 +58,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.87);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -93,5 +80,45 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+    color: #1a1a1a;
   }
+}
+
+/* New styles for your specific HTML elements */
+h1#titulo {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+img#imagenCarta {
+  width: 200px;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+#puntuacion {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+input[type="button"] {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.87);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+input[type="button"]:hover {
+  border-color: #646cff;
+  background-color: #1a1a1a;
+}
+input[type="button"]:disabled {
+  background-color: #b3b3b3;
+  cursor: default;
 }
