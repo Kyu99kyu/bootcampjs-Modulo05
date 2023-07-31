@@ -35,7 +35,7 @@ btnNueva.addEventListener("click", () => {
   ) {
     imagenCarta.src =
       "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
-    titulo.innerHTML = "7 y medio";
+    titulo.innerHTML = "Juego de las siete media";
     btnFuturo.hidden = true;
   }
 });
