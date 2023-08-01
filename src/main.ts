@@ -3,44 +3,44 @@ import "./style.css";
 let puntos: number = 0;
 let carta: number = 0;
 const divPuntiacion: HTMLElement | null = document.getElementById("puntuacion");
-const btnPlantarse: HTMLInputElement | null = document.getElementById(
-  "plnatarse"
-) as HTMLInputElement;
+const btnPlantarse: HTMLElement | null = document.getElementById("plantarse");
 const titulo: HTMLElement | null = document.getElementById("titulo");
-const btnCarta: HTMLInputElement | null = document.getElementById(
-  "pedirCarta"
-) as HTMLInputElement;
-const btnNueva: HTMLInputElement | null = document.getElementById(
-  "nueva"
-) as HTMLInputElement;
-const imagenCarta: HTMLImageElement | null = document.getElementById(
-  "imagenCarta"
-) as HTMLImageElement;
-const btnFuturo: HTMLInputElement | null = document.getElementById(
-  "futuro"
-) as HTMLInputElement;
+const btnCarta: HTMLElement | null = document.getElementById("pedirCarta");
+const btnNueva: HTMLElement | null = document.getElementById("nueva");
+const imagenCarta: HTMLElement | null = document.getElementById("imagenCarta");
+const btnFuturo: HTMLElement | null = document.getElementById("futuro");
 
 document.addEventListener("DOMContentLoaded", muestraPuntuacion);
-btnCarta.addEventListener("click", pedirCarta);
-btnPlantarse.addEventListener("click", plantarse);
-btnNueva.addEventListener("click", () => {
-  puntos = 0;
-  muestraPuntuacion();
-  btnCarta.disabled = false;
-  btnPlantarse.disabled = false;
-  btnFuturo.disabled = false;
-
-  if (
-    imagenCarta instanceof HTMLImageElement &&
-    titulo instanceof HTMLElement &&
-    btnFuturo instanceof HTMLInputElement
-  ) {
-    imagenCarta.src =
-      "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
-    titulo.innerHTML = "Juego de las siete media";
-    btnFuturo.hidden = true;
-  }
-});
+if (
+  btnCarta instanceof HTMLInputElement &&
+  btnPlantarse instanceof HTMLInputElement &&
+  btnNueva instanceof HTMLInputElement
+) {
+  btnCarta.addEventListener("click", pedirCarta);
+  btnPlantarse.addEventListener("click", plantarse);
+  btnNueva.addEventListener("click", () => {
+    puntos = 0;
+    muestraPuntuacion();
+    btnCarta.disabled = false;
+    if (
+      btnPlantarse instanceof HTMLInputElement &&
+      btnFuturo instanceof HTMLInputElement
+    ) {
+      btnPlantarse.disabled = false;
+      btnFuturo.disabled = false;
+    }
+    if (
+      imagenCarta instanceof HTMLImageElement &&
+      titulo instanceof HTMLElement &&
+      btnFuturo instanceof HTMLInputElement
+    ) {
+      imagenCarta.src =
+        "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
+      titulo.innerHTML = "Juego de las siete media";
+      btnFuturo.hidden = true;
+    }
+  });
+}
 
 function plantarse() {
   if (
