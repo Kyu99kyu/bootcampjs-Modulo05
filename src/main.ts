@@ -28,6 +28,8 @@ btnNueva.addEventListener("click", () => {
   muestraPuntuacion();
   btnCarta.disabled = false;
   btnPlantarse.disabled = false;
+  btnFuturo.disabled = false;
+
   if (
     imagenCarta instanceof HTMLImageElement &&
     titulo instanceof HTMLElement &&
@@ -70,7 +72,6 @@ function plantarse() {
     }
     if (btnFuturo instanceof HTMLInputElement) {
       btnFuturo.hidden = false;
-
       btnFuturo.addEventListener("click", () => {
         btnFuturo.disabled = true;
         pedirCarta();
@@ -83,7 +84,7 @@ function plantarse() {
 function muestraPuntuacion() {
   if (divPuntiacion instanceof HTMLElement) {
     divPuntiacion.innerHTML = puntos.toString();
-    if (puntos >= 7.5) {
+    if (puntos > 7.5) {
       if (
         titulo instanceof HTMLElement &&
         btnCarta instanceof HTMLInputElement &&
