@@ -36,7 +36,9 @@ function eventos() {
   if (
     btnCarta instanceof HTMLInputElement &&
     btnPlantarse instanceof HTMLInputElement &&
-    btnNueva instanceof HTMLInputElement
+    btnNueva instanceof HTMLInputElement &&
+    btnFuturo instanceof HTMLInputElement &&
+    titulo instanceof HTMLElement
   ) {
     btnCarta.addEventListener("click", () => {
       let carta = generarCarta();
@@ -46,39 +48,20 @@ function eventos() {
     });
     btnPlantarse.addEventListener("click", () => {
       if (
-        btnPlantarse instanceof HTMLInputElement &&
-        titulo instanceof HTMLElement &&
-        btnCarta instanceof HTMLInputElement
+        btnFuturo instanceof HTMLInputElement &&
+        titulo instanceof HTMLElement
       ) {
-        if (puntos < 4) {
-          btnPlantarse.disabled = true;
-          btnCarta.disabled = true;
-          titulo.textContent = "Has sido muy conservador";
-        } else if (puntos >= 4 && puntos < 6) {
-          btnPlantarse.disabled = true;
-          btnCarta.disabled = true;
-          titulo.textContent = "Te ha entrado el canguelo eh?";
-        } else if (puntos >= 6 && puntos <= 7) {
-          btnPlantarse.disabled = true;
-          btnCarta.disabled = true;
-          titulo.textContent = "Casi casi...";
-        } else if (puntos === 7.5) {
-          btnPlantarse.disabled = true;
-          btnCarta.disabled = true;
-          titulo.textContent = "¡Lo has clavado! ¡Enhorabuena!";
-        }
-        if (btnFuturo instanceof HTMLInputElement) {
-          btnFuturo.hidden = false;
-          btnFuturo.addEventListener("click", () => {
-            let carta = generarCarta();
-            puntos += generarValorCarta(carta);
-            mostrarCarta(carta);
-            muestraPuntuacion();
-            btnFuturo.disabled = true;
-            titulo.textContent = "Esta seria tu siguiente jugada";
-          });
-        }
+        comprobarPuntos(puntos);
+        btnFuturo.hidden = false;
       }
+    });
+    btnFuturo.addEventListener("click", () => {
+      let carta = generarCarta();
+      puntos += generarValorCarta(carta);
+      mostrarCarta(carta);
+      muestraPuntuacion();
+      btnFuturo.disabled = true;
+      titulo.textContent = "Esta seria tu siguiente jugada";
     });
     btnNueva.addEventListener("click", () => {
       puntos = 0;
@@ -117,6 +100,32 @@ function generarCarta(): number {
 function generarValorCarta(valorCarta: number) {
   puntos = valorCarta >= 10 ? 0.5 : valorCarta;
   return puntos;
+}
+
+function comprobarPuntos(puntos: number) {
+  if (
+    btnPlantarse instanceof HTMLInputElement &&
+    titulo instanceof HTMLElement &&
+    btnCarta instanceof HTMLInputElement
+  ) {
+    if (puntos < 4) {
+      btnPlantarse.disabled = true;
+      btnCarta.disabled = true;
+      titulo.textContent = "Has sido muy conservador";
+    } else if (puntos >= 4 && puntos < 6) {
+      btnPlantarse.disabled = true;
+      btnCarta.disabled = true;
+      titulo.textContent = "Te ha entrado el canguelo eh?";
+    } else if (puntos >= 6 && puntos <= 7) {
+      btnPlantarse.disabled = true;
+      btnCarta.disabled = true;
+      titulo.textContent = "Casi casi...";
+    } else if (puntos === 7.5) {
+      btnPlantarse.disabled = true;
+      btnCarta.disabled = true;
+      titulo.textContent = "¡Lo has clavado! ¡Enhorabuena!";
+    }
+  }
 }
 
 const mostrarCarta = (carta: number): void => {
