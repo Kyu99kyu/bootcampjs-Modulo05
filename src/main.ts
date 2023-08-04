@@ -1,7 +1,7 @@
 import "./style.css";
 
 let puntos: number = 0;
-const divPuntiacion: HTMLElement | null = document.getElementById("puntuacion");
+const divPuntuacion: HTMLElement | null = document.getElementById("puntuacion");
 const btnPlantarse: HTMLElement | null = document.getElementById("plantarse");
 const titulo: HTMLElement | null = document.getElementById("titulo");
 const btnCarta: HTMLElement | null = document.getElementById("pedirCarta");
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function muestraPuntuacion() {
-  if (divPuntiacion instanceof HTMLElement) {
-    divPuntiacion.textContent = puntos.toString();
+  if (divPuntuacion instanceof HTMLElement) {
+    divPuntuacion.textContent = puntos.toString();
     if (puntos > 7.5) {
       if (
         titulo instanceof HTMLElement &&
