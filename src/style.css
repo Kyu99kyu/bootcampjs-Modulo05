@@ -103,7 +103,7 @@ img#imagenCarta {
   color: rgba(255, 255, 255, 0.87);
 }
 
-input[type="button"] {
+button[type="button"] {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
@@ -114,11 +114,11 @@ input[type="button"] {
   cursor: pointer;
   margin-bottom: 10px;
 }
-input[type="button"]:hover {
+button[type="button"]:hover {
   border-color: #646cff;
   background-color: #1a1a1a;
 }
-input[type="button"]:disabled {
+button[type="button"]:disabled {
   background-color: #b3b3b3;
   cursor: default;
 }

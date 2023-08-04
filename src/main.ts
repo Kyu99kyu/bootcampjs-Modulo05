@@ -20,8 +20,8 @@ function muestraPuntuacion() {
     if (puntos > 7.5) {
       if (
         titulo instanceof HTMLElement &&
-        btnCarta instanceof HTMLInputElement &&
-        btnPlantarse instanceof HTMLInputElement
+        btnCarta instanceof HTMLButtonElement &&
+        btnPlantarse instanceof HTMLButtonElement
       ) {
         titulo.textContent = "Game Over";
         btnCarta.disabled = true;
@@ -34,10 +34,10 @@ function muestraPuntuacion() {
 
 function eventos() {
   if (
-    btnCarta instanceof HTMLInputElement &&
-    btnPlantarse instanceof HTMLInputElement &&
-    btnNueva instanceof HTMLInputElement &&
-    btnFuturo instanceof HTMLInputElement &&
+    btnCarta instanceof HTMLButtonElement &&
+    btnPlantarse instanceof HTMLButtonElement &&
+    btnNueva instanceof HTMLButtonElement &&
+    btnFuturo instanceof HTMLButtonElement &&
     titulo instanceof HTMLElement
   ) {
     btnCarta.addEventListener("click", () => {
@@ -48,7 +48,7 @@ function eventos() {
     });
     btnPlantarse.addEventListener("click", () => {
       if (
-        btnFuturo instanceof HTMLInputElement &&
+        btnFuturo instanceof HTMLButtonElement &&
         titulo instanceof HTMLElement
       ) {
         comprobarPuntos(puntos);
@@ -68,8 +68,8 @@ function eventos() {
       muestraPuntuacion();
       btnCarta.disabled = false;
       if (
-        btnPlantarse instanceof HTMLInputElement &&
-        btnFuturo instanceof HTMLInputElement
+        btnPlantarse instanceof HTMLButtonElement &&
+        btnFuturo instanceof HTMLButtonElement
       ) {
         btnPlantarse.disabled = false;
         btnFuturo.disabled = false;
@@ -77,7 +77,7 @@ function eventos() {
       if (
         imagenCarta instanceof HTMLImageElement &&
         titulo instanceof HTMLElement &&
-        btnFuturo instanceof HTMLInputElement
+        btnFuturo instanceof HTMLButtonElement
       ) {
         imagenCarta.src =
           "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
@@ -104,9 +104,9 @@ function generarValorCarta(valorCarta: number) {
 
 function comprobarPuntos(puntos: number) {
   if (
-    btnPlantarse instanceof HTMLInputElement &&
+    btnPlantarse instanceof HTMLButtonElement &&
     titulo instanceof HTMLElement &&
-    btnCarta instanceof HTMLInputElement
+    btnCarta instanceof HTMLButtonElement
   ) {
     if (puntos < 4) {
       btnPlantarse.disabled = true;
