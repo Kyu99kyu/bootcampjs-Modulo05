@@ -15,20 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function muestraPuntuacion() {
-  if (divPuntuacion instanceof HTMLElement) {
+  if (divPuntuacion && divPuntuacion instanceof HTMLElement) {
     divPuntuacion.textContent = puntos.toString();
-    if (puntos > 7.5) {
-      if (
-        titulo instanceof HTMLElement &&
-        btnCarta instanceof HTMLButtonElement &&
-        btnPlantarse instanceof HTMLButtonElement
-      ) {
-        titulo.textContent = "Game Over";
-        btnCarta.disabled = true;
-        btnPlantarse.disabled = true;
-      }
-    }
-    console.log(puntos.toString());
+  } else {
+    console.error("No se ha encontrado el elemento puntuación");
   }
 }
 
