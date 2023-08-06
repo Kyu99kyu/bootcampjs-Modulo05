@@ -14,109 +14,142 @@ document.addEventListener("DOMContentLoaded", () => {
   eventos();
 });
 
-function muestraPuntuacion() {
+const muestraPuntuacion = (): void => {
   if (divPuntuacion && divPuntuacion instanceof HTMLElement) {
     divPuntuacion.textContent = puntos.toString();
   } else {
     console.error("No se ha encontrado el elemento puntuación");
   }
-}
+};
 
-function eventos() {
+const eventos = (): void => {
   if (
     btnCarta instanceof HTMLButtonElement &&
     btnPlantarse instanceof HTMLButtonElement &&
     btnNueva instanceof HTMLButtonElement &&
-    btnFuturo instanceof HTMLButtonElement &&
-    titulo instanceof HTMLElement
+    btnFuturo instanceof HTMLButtonElement
   ) {
     btnCarta.addEventListener("click", () => {
-      let carta = generarCarta();
-      puntos += generarValorCarta(carta);
-      mostrarCarta(carta);
+      dameCarta();
       muestraPuntuacion();
     });
-    btnPlantarse.addEventListener("click", () => {
-      if (
-        btnFuturo instanceof HTMLButtonElement &&
-        titulo instanceof HTMLElement
-      ) {
-        comprobarPuntos(puntos);
-        btnFuturo.hidden = false;
-      }
-    });
-    btnFuturo.addEventListener("click", () => {
-      let carta = generarCarta();
-      puntos += generarValorCarta(carta);
-      mostrarCarta(carta);
-      muestraPuntuacion();
-      btnFuturo.disabled = true;
-      titulo.textContent = "Esta seria tu siguiente jugada";
-    });
-    btnNueva.addEventListener("click", () => {
-      puntos = 0;
-      muestraPuntuacion();
-      btnCarta.disabled = false;
-      if (
-        btnPlantarse instanceof HTMLButtonElement &&
-        btnFuturo instanceof HTMLButtonElement
-      ) {
-        btnPlantarse.disabled = false;
-        btnFuturo.disabled = false;
-      }
-      if (
-        imagenCarta instanceof HTMLImageElement &&
-        titulo instanceof HTMLElement &&
-        btnFuturo instanceof HTMLButtonElement
-      ) {
-        imagenCarta.src =
-          "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
-        titulo.textContent = "Juego de las siete media";
-        btnFuturo.hidden = true;
-      }
-    });
+    btnPlantarse.addEventListener("click", plantarse);
+    btnFuturo.addEventListener("click", verJugadaFutura);
+    btnNueva.addEventListener("click", reset);
+  } else {
+    console.error("No se ha encontrado el elemento puntuación");
   }
-}
+};
 
-function generarNumeroAleatorio(): number {
+const reset = (): void => {
+  if (
+    btnCarta instanceof HTMLButtonElement &&
+    btnPlantarse instanceof HTMLButtonElement &&
+    btnFuturo instanceof HTMLButtonElement &&
+    titulo instanceof HTMLElement &&
+    imagenCarta instanceof HTMLImageElement
+  ) {
+    puntos = 0;
+    muestraPuntuacion();
+    activarBotones();
+    const mensaje: string = obtenerMensajeSegunPuntos(puntos);
+    actualizarTitulo(mensaje);
+    const carta: number = 0;
+    mostrarCarta(carta);
+    btnFuturo.hidden = true;
+  } else {
+    console.error("No se ha encontrado el elemento puntuación");
+  }
+};
+
+const dameCarta = (): void => {
+  let carta: number = generarCarta();
+  puntos += generarValorCarta(carta);
+  mostrarCarta(carta);
+};
+
+const plantarse = (): void => {
+  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLElement) {
+    const mensaje: string = obtenerMensajeSegunPuntos(puntos);
+    actualizarTitulo(mensaje);
+    desactivarBotones();
+    btnFuturo.hidden = false;
+  } else {
+    console.error("No se ha encontrado el elemento titulo");
+  }
+};
+
+const verJugadaFutura = (): void => {
+  dameCarta();
+  muestraPuntuacion();
+  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLElement) {
+    btnFuturo.disabled = true;
+    titulo.textContent = "Esta seria tu siguiente jugada";
+  } else {
+    console.error("No se ha encontrado el elemento titulo");
+  }
+};
+
+const generarNumeroAleatorio = (): number => {
   return Math.floor(Math.random() * 10) + 1;
-}
+};
 
-function generarCarta(): number {
-  const numeroAleatorio = generarNumeroAleatorio();
+const generarCarta = (): number => {
+  const numeroAleatorio: number = generarNumeroAleatorio();
   return numeroAleatorio > 7 ? numeroAleatorio + 2 : numeroAleatorio;
-}
+};
 
-function generarValorCarta(valorCarta: number) {
+const generarValorCarta = (valorCarta: number): number => {
   puntos = valorCarta >= 10 ? 0.5 : valorCarta;
   return puntos;
-}
+};
 
-function comprobarPuntos(puntos: number) {
+const obtenerMensajeSegunPuntos = (puntos: number): string => {
+  if (puntos === 0) {
+    return "Juego de las siete media";
+  } else if (puntos < 4) {
+    return "Has sido muy conservador";
+  } else if (puntos >= 4 && puntos < 6) {
+    return "Te ha entrado el canguelo eh?";
+  } else if (puntos >= 6 && puntos <= 7) {
+    return "Casi casi...";
+  } else if (puntos === 7.5) {
+    return "¡Lo has clavado! ¡Enhorabuena!";
+  } else {
+    return "Game Over";
+  }
+};
+
+const actualizarTitulo = (mensaje: string): void => {
+  if (titulo instanceof HTMLElement) titulo.textContent = mensaje;
+};
+
+const desactivarBotones = (): void => {
   if (
     btnPlantarse instanceof HTMLButtonElement &&
-    titulo instanceof HTMLElement &&
-    btnCarta instanceof HTMLButtonElement
+    btnCarta instanceof HTMLButtonElement &&
+    btnFuturo instanceof HTMLButtonElement
   ) {
-    if (puntos < 4) {
-      btnPlantarse.disabled = true;
-      btnCarta.disabled = true;
-      titulo.textContent = "Has sido muy conservador";
-    } else if (puntos >= 4 && puntos < 6) {
-      btnPlantarse.disabled = true;
-      btnCarta.disabled = true;
-      titulo.textContent = "Te ha entrado el canguelo eh?";
-    } else if (puntos >= 6 && puntos <= 7) {
-      btnPlantarse.disabled = true;
-      btnCarta.disabled = true;
-      titulo.textContent = "Casi casi...";
-    } else if (puntos === 7.5) {
-      btnPlantarse.disabled = true;
-      btnCarta.disabled = true;
-      titulo.textContent = "¡Lo has clavado! ¡Enhorabuena!";
-    }
+    btnPlantarse.disabled = true;
+    btnCarta.disabled = true;
+  } else {
+    console.error("No se ha encontrado el elemento titulo");
   }
-}
+};
+
+const activarBotones = (): void => {
+  if (
+    btnPlantarse instanceof HTMLButtonElement &&
+    btnCarta instanceof HTMLButtonElement &&
+    btnFuturo instanceof HTMLButtonElement
+  ) {
+    btnPlantarse.disabled = false;
+    btnCarta.disabled = false;
+    btnFuturo.disabled = false;
+  } else {
+    console.error("No se ha encontrado el elemento titulo");
+  }
+};
 
 const mostrarCarta = (carta: number): void => {
   if (imagenCarta instanceof HTMLImageElement) {
@@ -161,6 +194,12 @@ const mostrarCarta = (carta: number): void => {
         imagenCarta.src =
           "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/copas/12_rey-copas.jpg";
         break;
+      default: {
+        imagenCarta.src =
+          "https://raw.githubusercontent.com/Lemoncode/fotos-ejemplos/main/cartas/back.jpg";
+      }
     }
+  } else {
+    console.error("No se ha encontrado el elemento titulo");
   }
 };
