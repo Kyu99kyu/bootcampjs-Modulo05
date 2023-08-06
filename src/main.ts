@@ -34,7 +34,11 @@ const eventos = (): void => {
       muestraPuntuacion();
     });
     btnPlantarse.addEventListener("click", plantarse);
-    btnFuturo.addEventListener("click", verJugadaFutura);
+    btnFuturo.addEventListener("click", () => {
+      dameCarta();
+      muestraPuntuacion();
+      actualizarInterfazJugadaFutura();
+    });
     btnNueva.addEventListener("click", reset);
   } else {
     console.error("No se ha encontrado el elemento puntuación");
@@ -79,9 +83,7 @@ const plantarse = (): void => {
   }
 };
 
-const verJugadaFutura = (): void => {
-  dameCarta();
-  muestraPuntuacion();
+const actualizarInterfazJugadaFutura = (): void => {
   if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLElement) {
     btnFuturo.disabled = true;
     titulo.textContent = "Esta seria tu siguiente jugada";
