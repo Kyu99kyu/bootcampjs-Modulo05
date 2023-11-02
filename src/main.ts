@@ -1,13 +1,13 @@
 import "./style.css";
 
 let puntos: number = 0;
-const divPuntuacion: HTMLElement | null = document.getElementById("puntuacion");
-const btnPlantarse: HTMLElement | null = document.getElementById("plantarse");
-const titulo: HTMLElement | null = document.getElementById("titulo");
-const btnCarta: HTMLElement | null = document.getElementById("pedirCarta");
-const btnNueva: HTMLElement | null = document.getElementById("nueva");
-const imagenCarta: HTMLElement | null = document.getElementById("imagenCarta");
-const btnFuturo: HTMLElement | null = document.getElementById("futuro");
+const divPuntuacion = document.getElementById("puntuacion");
+const btnPlantarse= document.getElementById("plantarse");
+const titulo = document.getElementById("titulo");
+const btnCarta = document.getElementById("pedirCarta");
+const btnNueva = document.getElementById("nueva");
+const imagenCarta = document.getElementById("imagenCarta");
+const btnFuturo = document.getElementById("futuro");
 
 document.addEventListener("DOMContentLoaded", () => {
   muestraPuntuacion();
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const muestraPuntuacion = (): void => {
-  if (divPuntuacion && divPuntuacion instanceof HTMLElement) {
+  if (divPuntuacion && divPuntuacion instanceof HTMLDivElement) {
     divPuntuacion.textContent = puntos.toString();
   } else {
     console.error("No se ha encontrado el elemento puntuación");
@@ -50,7 +50,7 @@ const reset = (): void => {
     btnCarta instanceof HTMLButtonElement &&
     btnPlantarse instanceof HTMLButtonElement &&
     btnFuturo instanceof HTMLButtonElement &&
-    titulo instanceof HTMLElement &&
+    titulo instanceof HTMLHeadingElement &&
     imagenCarta instanceof HTMLImageElement
   ) {
     puntos = 0;
@@ -73,7 +73,7 @@ const dameCarta = (): void => {
 };
 
 const plantarse = (): void => {
-  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLElement) {
+  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLHeadingElement) {
     const mensaje: string = obtenerMensajeSegunPuntos(puntos);
     actualizarTitulo(mensaje);
     desactivarBotones();
@@ -84,7 +84,7 @@ const plantarse = (): void => {
 };
 
 const actualizarInterfazJugadaFutura = (): void => {
-  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLElement) {
+  if (btnFuturo instanceof HTMLButtonElement && titulo instanceof HTMLHeadingElement) {
     btnFuturo.disabled = true;
     titulo.textContent = "Esta seria tu siguiente jugada";
   } else {
@@ -123,7 +123,7 @@ const obtenerMensajeSegunPuntos = (puntos: number): string => {
 };
 
 const actualizarTitulo = (mensaje: string): void => {
-  if (titulo instanceof HTMLElement) titulo.textContent = mensaje;
+  if (titulo instanceof HTMLHeadingElement) titulo.textContent = mensaje;
 };
 
 const desactivarBotones = (): void => {
